@@ -46,6 +46,10 @@ class ColourAssembler
 		file = File.join(File.dirname(__FILE__), @output_file)
 		File.open(file, 'w') { |f| 
 			write_header(f)
+			
+			@colours.each do |key,group|
+				write_group(f, key, group)
+			end
 		}
 	end
 	
@@ -61,6 +65,22 @@ class ColourAssembler
 		#{@comment_postfix}
 		EOS
 		fo.puts header
+		sep(fo)
+	end
+	
+	def write_group(fo, group_name, group)
+		group_header = <<~EOS
+		#{@comment_prefix}
+		#{@comment_newline_prefix} Group name: #{group_name}
+		#{@comment_newline_prefix} #{auto_pluralise(group["swatches"].keys.length, "variable")} generated.
+		#{@comment_postfix}
+		EOS
+		fo.puts group_header
+		group["swatches"].each do |k, v|
+			var_assembled = "#{@variable_prefix}#{@colour_prefix}#{group_name}-#{k}: #{group["decoration"][0]}#{v}#{group["decoration"][1]}#{@colour_postfix}\n"
+			fo.puts var_assembled
+		end
+		sep(fo)
 	end
 	
 	def auto_pluralise(n, singular, plural=nil)
@@ -72,10 +92,17 @@ class ColourAssembler
 			"#{n} #{singular}s"
 		end
 	end
+	
+	def sep(fo)
+		fo.puts @comment_prefix+("*"*(80-@comment_prefix.length-@comment_postfix.length))+@comment_postfix
+		fo.puts "\n\n\n"
+	end
 end
 
 
 assembler = ColourAssembler.new
 
 assembler.get_colour_group_info_from_file("claret")
+assembler.get_colour_group_info_from_file("pop")
+assembler.get_colour_group_info_from_file("oxfblue")
 assembler.generate_stylesheet
