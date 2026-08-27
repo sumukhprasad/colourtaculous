@@ -43,6 +43,7 @@ class ColourAssembler
 	end
 	
 	def generate_stylesheet
+		puts "Writing stylesheet..."
 		file = File.join(File.dirname(__FILE__), @output_file)
 		File.open(file, 'w') { |f| 
 			write_header(f)
@@ -51,6 +52,7 @@ class ColourAssembler
 				write_group(f, key, group)
 			end
 		}
+		puts "Finished writing stylesheet!"
 	end
 	
 	
@@ -66,6 +68,8 @@ class ColourAssembler
 		EOS
 		fo.puts header
 		sep(fo)
+		
+		puts "Written header."
 	end
 	
 	def write_group(fo, group_name, group)
@@ -81,6 +85,8 @@ class ColourAssembler
 			fo.puts var_assembled
 		end
 		sep(fo)
+		
+		puts "Written group `#{group_name}`."
 	end
 	
 	def auto_pluralise(n, singular, plural=nil)
@@ -98,11 +104,3 @@ class ColourAssembler
 		fo.puts "\n\n\n"
 	end
 end
-
-
-assembler = ColourAssembler.new
-
-assembler.get_colour_group_info_from_file("claret")
-assembler.get_colour_group_info_from_file("pop")
-assembler.get_colour_group_info_from_file("oxfblue")
-assembler.generate_stylesheet
