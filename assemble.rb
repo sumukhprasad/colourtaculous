@@ -20,12 +20,12 @@ class ColourAssembler
 	end
 	
 	def get_colour_group_info_from_file(f_relative_path)
-		puts "Reading defs/#{f_relative_path}.yml..."
-		fcontents = File.read("./defs/#{f_relative_path}.yml")
+		puts "Reading #{f_relative_path}.yml..."
+		fcontents = File.read("./#{f_relative_path}.yml")
 		raw_obj = YAML.load(fcontents)
 		
 		if raw_obj["version"] != @version
-			raise "Error! Version mismatch, current #{@version} but found #{raw_obj["version"]} in defs/#{f_relative_path}.yml."
+			raise "Error! Version mismatch, current #{@version} but found #{raw_obj["version"]} in ./#{f_relative_path}.yml."
 		end
 	
 		puts "Read `#{raw_obj["name"]}`, with #{raw_obj["swatches"].keys.length} entries."
