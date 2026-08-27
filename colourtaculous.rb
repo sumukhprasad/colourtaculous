@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative "assemble"
+require_relative "versioning"
 require 'yaml'
 require 'optparse'
 
-puts "Colourtaculous! (version 0.0.1)"
+puts "Colourtaculous! (version #{Versioning.current_version})"
 
 
 

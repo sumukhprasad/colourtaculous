@@ -1,3 +1,4 @@
+require_relative "versioning"
 require 'yaml'
 
 
@@ -7,7 +8,6 @@ class ColourAssembler
 	
 	def initialize(variable_prefix: "$", colour_prefix: "color-", colour_postfix: "", comment_prefix: "/* ", comment_newline_prefix: " * ", comment_postfix: " */", output_file: "_vars.sass")
 		@colours = {}
-		@version = "0.0.1"
 
 		@variable_prefix = variable_prefix
 		@colour_prefix = colour_prefix
@@ -24,7 +24,7 @@ class ColourAssembler
 		fcontents = File.read("./#{f_relative_path}.yml")
 		raw_obj = YAML.load(fcontents)
 		
-		if raw_obj["version"] != @version
+		if Versioning.check_version(raw_obj["version"])
 			raise "Error! Version mismatch, current #{@version} but found #{raw_obj["version"]} in ./#{f_relative_path}.yml."
 		end
 	
