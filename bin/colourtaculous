@@ -1,0 +1,5 @@
+#! /usr/bin/env ruby
+
+Dir.chdir(Dir.pwd) do
+	load File.expand_path("../colourtaculous.rb", __dir__)
+end

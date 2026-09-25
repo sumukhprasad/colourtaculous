@@ -49,14 +49,13 @@ class ColourAssembler
 	
 	def generate_stylesheet
 		puts "Writing stylesheet..."
-		file = File.join(File.dirname(__FILE__), @output_file)
-		File.open(file, 'w') { |f| 
+		File.open(@output_file, 'w') do |f|
 			write_header(f)
 			
 			@colours.each do |key,group|
 				write_group(f, key, group)
 			end
-		}
+		end
 		puts "Finished writing stylesheet!"
 	end
 	
