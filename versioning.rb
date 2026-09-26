@@ -1,7 +1,7 @@
 module Versioning
-	VERSION_MAJOR = 0
+	VERSION_MAJOR = 1
 	VERSION_MINOR = 0
-	VERSION_BUGFIX = 1
+	VERSION_BUGFIX = 0
 	
 	def self.current_version
 		return self.assemble_semantic_version

@@ -27,7 +27,7 @@ inputfiles:
 It then reads each of the input files (in order, if there's something that requires ordering):
 ```yaml
 name: gray
-version: 0.0.1
+version: 1.0.0
 prefix: "#"
 postfix: ""
 swatches:
@@ -123,7 +123,7 @@ A colour file contains a name, version, prefix, postfix, and a collection of swa
 
 ```yaml
 name: gray
-version: 0.0.1
+version: 1.0.0
 prefix: "#"
 postfix: ""
 swatches:
